@@ -47,3 +47,12 @@ export class UserRegisterInput extends OmitType(
   @Field(() => String)
   password: string
 }
+
+@InputType()
+export class UserMeUpdateData extends PartialType(
+  OmitType(
+    User,
+    ['id', 'createdAt', 'updatedAt', 'passwordHash'] as const,
+    InputType,
+  ),
+) {}

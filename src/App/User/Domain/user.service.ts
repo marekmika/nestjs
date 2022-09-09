@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 // TODO: Move prisma service somewhere else
-import { PrismaService } from '../../../prisma.service'
+import { PrismaService } from '@src/prisma.service'
 import { user, Prisma } from '@prisma/client'
 import { hashPassword } from './utils/password'
 

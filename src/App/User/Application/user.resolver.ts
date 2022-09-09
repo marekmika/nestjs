@@ -1,8 +1,13 @@
 import { UseGuards } from '@nestjs/common'
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql'
-import { AuthGuard, secret } from 'src/App/Auth/auth.guard'
+import { AuthGuard, secret } from '@App/Auth/auth.guard'
 import { UserService } from '../Domain/user.service'
-import { User, UserLogin, UserRegisterInput } from './user.gql'
+import {
+  User,
+  UserLogin,
+  UserMeUpdateData,
+  UserRegisterInput,
+} from './user.gql'
 import * as jwt from 'jsonwebtoken'
 import { hashPassword, isPasswordAndHashEqual } from '../Domain/utils/password'
 
@@ -62,6 +67,16 @@ export class UserResolver {
   async findMe(@Context('user') user: { id: string; passwordHash: string }) {
     const { id } = user
     return this.userService.user({ id })
+  }
+
+  @Mutation(() => User)
+  @UseGuards(AuthGuard)
+  async updatedMe(
+    @Context('user') user: { id: string },
+    @Args('data') data: UserMeUpdateData,
+  ) {
+    const { id } = user
+    return this.userService.updateUser({ where: { id }, data })
   }
 
   @Query(() => [User])

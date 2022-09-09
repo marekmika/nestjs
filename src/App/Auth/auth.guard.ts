@@ -8,7 +8,7 @@ import {
   HttpStatus,
 } from '@nestjs/common'
 import { GqlExecutionContext } from '@nestjs/graphql'
-import { PrismaService } from 'src/prisma.service'
+import { PrismaService } from '@src/prisma.service'
 import { user as User } from '@prisma/client'
 import * as jwt from 'jsonwebtoken'
 
