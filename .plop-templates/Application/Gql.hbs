@@ -1,0 +1,8 @@
+import { Field, ObjectType } from '@nestjs/graphql'
+import { NonEmptyStringResolver } from 'graphql-scalars'
+
+@ObjectType()
+export class {{pascalCase name}} {
+  @Field(() => NonEmptyStringResolver)
+  id: string
+}
