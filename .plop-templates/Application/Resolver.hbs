@@ -1,0 +1,16 @@
+import { Injectable } from '@nestjs/common'
+import { Resolver, Query, Args } from '@nestjs/graphql'
+import { Prisma } from '@prisma/client'
+import { PrismaService } from '../../../prisma.service'
+import { {{pascalCase name}}Service } from '../Domain/{{camelCase name}}.service'
+import { {{pascalCase name}} } from './{{camelCase name}}.gql'
+
+@Resolver(() => {{pascalCase name}})
+export class {{pascalCase name}}Resolver {
+  constructor(private prisma: {{pascalCase name}}Service) {}
+
+  @Query(() => String)
+  async find{{pascalCase name}}(@Args('input') input: string): Promise<string> {
+    return input
+  }
+}

@@ -1,0 +1,28 @@
+import graphqlSupertest, {
+  createBeforeAll,
+  closeAfterAll,
+  AppContext,
+} from '@Common/utils/graphqlSupertest'
+import { faker } from '@faker-js/faker'
+
+describe('{{pascalCase name}} Resolver (e2e)', () => {
+  const context: AppContext = {}
+
+  beforeAll(createBeforeAll(context))
+
+  afterAll(closeAfterAll(context))
+
+  describe('{{pascalCase name}} First test', () => {
+    it('should find', async () => {
+      await graphqlSupertest(context.app, {
+        query: /* GraphQL */ `
+          query {
+            find
+          }
+        `,
+      }).expect((res) => {
+        expect(res.body.data.find).toEqual(true)
+      })
+    })
+  })
+})
