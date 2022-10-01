@@ -1,6 +1,6 @@
 ## Description
 
-Starter-repo - Nest with Prisma and Mongodb
+Starter-repo - Nest with Prisma and PostgreSQL
 
 ## Prerequisites
 Create and fill up .env file in root folder based on .env-dev file 

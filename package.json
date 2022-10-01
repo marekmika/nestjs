@@ -14,13 +14,15 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
-    "fixtures:load": "env-cmd --fallback --silent -f ../.env --use-shell 'ts-node ./src/Fixtures/index.ts'",
-    "fixtures:drop": "env-cmd --fallback --silent -f ../.env --use-shell 'ts-node ./src/Fixtures/dropData.ts'",
     "dev:debug": "nest start --debug --watch",
     "dev:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test:e2e": "env-cmd --fallback --silent -f ../.env --use-shell 'yarn fixtures:load && jest --config ./jest-e2e.json'",
-    "plop:generate": "plop --plopfile plopfile.js"
+    "plop:generate": "plop --plopfile plopfile.js",
+    "reset:db": "env-cmd --fallback --silent -f ../.env --use-shell 'prisma migrate reset'",
+    "seed:db": "env-cmd --fallback --silent -f ../.env --use-shell 'ts-node ./prisma/seed.ts'",
+    "reset:seed:db": "env-cmd --fallback --silent -f ../.env --use-shell 'yarn reset:db --force && yarn seed:db'",
+    "test:e2e": "env-cmd --fallback --silent -f ../.env --use-shell 'yarn reset:seed:db && jest --config ./jest-e2e.json'",
+    "migration:generate": "prisma migrate dev --name"
   },
   "dependencies": {
     "@faker-js/faker": "^7.5.0",
@@ -37,7 +39,6 @@
     "graphql-scalars": "^1.17.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "node-mongodb-fixtures": "^3.2.9",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
